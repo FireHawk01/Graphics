@@ -1,0 +1,63 @@
+#include <GL/freeglut.h>
+#include <GL/gl.h>
+#include<bits/stdc++.h>
+using namespace std;
+
+float x,cx,y,cy,r;
+
+void init (void)
+{
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glColor3f(0.0f, 0.0f, 0.0f);
+	glPointSize(4.0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-200.0, 200.0, -200.0, 200.0);
+}
+
+	
+void renderFunction()
+{	
+    glClear (GL_COLOR_BUFFER_BIT);
+    glColor3f (1.0, 1.0, 1.0);
+    glPointSize(1.0);
+    float d=3-(2*r);
+    do{ 
+        glBegin(GL_POINTS);
+        glVertex2i((x+cx),(y+cy));
+        glVertex2i((-x+cx),(y+cy));
+        glVertex2i((x+cx),(-y+cy));
+        glVertex2i((-x+cx),(-y+cy));
+
+        glEnd();
+	x+=1;
+	if (d<0){
+		d=d+(4*x)+6;
+	}else{
+		d=d+4*(x-y)+10;
+                y-=1;
+	}
+
+    }while(x-y<=0);
+
+    glFlush();
+ 
+}
+int main(int argc, char** argv)
+{
+    cout << "Enter the coordinates of center" << endl;
+    cin >> cx >> cy;
+    cout << "Enter the radius" << endl;
+    cin >> r;
+    x=0;
+    y=r;
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE);
+    glutInitWindowSize(400,400);
+    glutInitWindowPosition(100,150);
+    glutCreateWindow("Bresenham Circle Algorithm");
+    glutDisplayFunc(renderFunction);
+    init();
+    glutMainLoop();    
+    return 0;
+}
