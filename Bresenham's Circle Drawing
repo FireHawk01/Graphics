@@ -28,6 +28,10 @@ void renderFunction()
         glVertex2i((-x+cx),(y+cy));
         glVertex2i((x+cx),(-y+cy));
         glVertex2i((-x+cx),(-y+cy));
+	glVertex2i((y+cx),(x+cy));
+        glVertex2i((-y+cx),(x+cy));
+        glVertex2i((y+cx),(-x+cy));
+        glVertex2i((-y+cx),(-x+cy));
 
         glEnd();
 	x+=1;
